@@ -1,0 +1,388 @@
+# AutoBOQ Project Documentation
+
+## Project Structure
+/
+├── index.html
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── tailwind.config.js
+├── src/
+│   ├── App.css
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── index.css
+│   ├── assets/
+│   │   ├── Complete CHOICEDGE logo.png
+│   │   └── choicedge-logo.svg
+│   ├── components/
+│   │   └── GlowingButton.tsx
+│   ├── pages/
+│   │   ├── BOQGeneration.tsx
+│   │   ├── Home.tsx
+│   │   └── ProjectType.tsx
+│   ├── styles/
+│   │   ├── glowing-button.css
+│   │   └── project-type.css
+│   └── types/
+│       └── images.d.ts
+
+## Configuration Files
+
+### package.json
+```json
+{
+  "name": "boq-generator",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.15",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  }
+}
+```
+
+### postcss.config.js
+```javascript
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+### tailwind.config.js
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+### index.html
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+```
+
+## Source Code
+
+### src/main.tsx
+```typescript
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+```
+
+### src/App.tsx
+```typescript
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import ProjectType from './pages/ProjectType'
+import BOQGeneration from './pages/BOQGeneration'
+import './App.css'
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/project-type" element={<ProjectType />} />
+        <Route path="/boq-generation" element={<BOQGeneration />} />
+      </Routes>
+    </Router>
+  )
+}
+
+export default App
+```
+
+### src/pages/Home.tsx
+```typescript
+import { useNavigate } from 'react-router-dom'
+import GlowingButton from '../components/GlowingButton'
+import logo from '../assets/Complete CHOICEDGE logo.png'
+
+function Home() {
+  const navigate = useNavigate()
+
+  return (
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+      <img src={logo} alt="CHOICEDGE Logo" className="w-96 mb-8" />
+      <h1 className="text-4xl font-bold text-white mb-8">Welcome to AutoBOQ</h1>
+      <GlowingButton onClick={() => navigate('/project-type')}>
+        Get Started
+      </GlowingButton>
+    </div>
+  )
+}
+
+export default Home
+```
+
+### src/pages/ProjectType.tsx
+```typescript
+import { useNavigate } from 'react-router-dom'
+import '../styles/project-type.css'
+
+function ProjectType() {
+  const navigate = useNavigate()
+
+  return (
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+      <h1 className="text-4xl font-bold text-white mb-8">Select Project Type</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <button
+          onClick={() => navigate('/boq-generation')}
+          className="project-type-button"
+        >
+          <h2 className="text-xl font-semibold mb-2">Residential</h2>
+          <p className="text-sm">For houses, apartments, and living spaces</p>
+        </button>
+        <button
+          onClick={() => navigate('/boq-generation')}
+          className="project-type-button"
+        >
+          <h2 className="text-xl font-semibold mb-2">Commercial</h2>
+          <p className="text-sm">For offices, retail spaces, and businesses</p>
+        </button>
+        <button
+          onClick={() => navigate('/boq-generation')}
+          className="project-type-button"
+        >
+          <h2 className="text-xl font-semibold mb-2">Industrial</h2>
+          <p className="text-sm">For factories, warehouses, and manufacturing</p>
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default ProjectType
+```
+
+### src/pages/BOQGeneration.tsx
+```typescript
+import { useState } from 'react'
+
+function BOQGeneration() {
+  const [file, setFile] = useState<File | null>(null)
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setFile(event.target.files[0])
+    }
+  }
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    // Handle file upload and processing here
+    console.log('Processing file:', file)
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+      <h1 className="text-4xl font-bold text-white mb-8">Generate BOQ</h1>
+      <form onSubmit={handleSubmit} className="w-full max-w-md">
+        <div className="mb-6">
+          <label
+            className="block text-white text-sm font-bold mb-2"
+            htmlFor="file-upload"
+          >
+            Upload your CAD file
+          </label>
+          <input
+            type="file"
+            id="file-upload"
+            accept=".dwg,.dxf"
+            onChange={handleFileChange}
+            className="w-full p-2 rounded bg-gray-700 text-white"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+        >
+          Generate BOQ
+        </button>
+      </form>
+    </div>
+  )
+}
+
+export default BOQGeneration
+```
+
+### src/components/GlowingButton.tsx
+```typescript
+import '../styles/glowing-button.css'
+
+interface GlowingButtonProps {
+  onClick?: () => void
+  children: React.ReactNode
+}
+
+function GlowingButton({ onClick, children }: GlowingButtonProps) {
+  return (
+    <button onClick={onClick} className="glowing-button">
+      {children}
+    </button>
+  )
+}
+
+export default GlowingButton
+```
+
+### src/styles/glowing-button.css
+```css
+.glowing-button {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  background-color: transparent;
+  border: 2px solid #3498db;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: color 0.3s;
+}
+
+.glowing-button:hover {
+  color: black;
+}
+
+.glowing-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3498db;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s;
+  z-index: -1;
+}
+
+.glowing-button:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+```
+
+### src/styles/project-type.css
+```css
+.project-type-button {
+  @apply bg-gray-800 hover:bg-gray-700 text-white p-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105;
+  min-width: 250px;
+}
+
+.project-type-button h2 {
+  @apply text-xl font-semibold mb-2;
+}
+
+.project-type-button p {
+  @apply text-gray-400;
+}
+```
+
+### src/types/images.d.ts
+```typescript
+declare module '*.svg' {
+  const content: any
+  export default content
+}
+
+declare module '*.png' {
+  const content: any
+  export default content
+}
+
+declare module '*.jpg' {
+  const content: any
+  export default content
+}
+
+declare module '*.jpeg' {
+  const content: any
+  export default content
+}
+
+declare module '*.gif' {
+  const content: any
+  export default content
+}
+```
+
+### src/App.css
+```css
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+```
+
+### src/index.css
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```

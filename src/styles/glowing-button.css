@@ -1,0 +1,208 @@
+:root {
+  --clr-neon: #fae650;
+  --clr-bg: #000000;
+}
+
+.neon-button {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  border: var(--clr-neon) 0.125em solid;
+  padding: 0.75em 1.5em;
+  margin: 1em;
+  font-size: 1em;
+  font-weight: light;
+  font-family: "acherus-feral", sans-serif;
+  border-radius: 0.5em;
+  position: relative;
+  transition: all 0.3s ease;
+  background: transparent;
+  min-width: 150px;
+  margin-bottom: 1rem;
+}
+
+.neon-button:hover {
+  background: var(--clr-neon);
+  color: black;
+}
+
+.hover-description {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: var(--clr-bg);
+  font-size: 0.85em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 0.5em;
+  bottom: 0.5em;
+  left: 0;
+  z-index: 2;
+}
+
+.neon-button:hover .hover-description {
+  opacity: 1;
+}
+
+.neon-button:hover {
+  background: var(--clr-neon);
+  color: var(--clr-bg);
+}
+
+/* Removed the ::before pseudo-element that created the glow effect below the button */
+
+.neon-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 2em 0.5em var(--clr-neon);
+  opacity: 0;
+  background-color: var(--clr-neon);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.neon-button:hover {
+  color: var(--clr-bg);
+  text-shadow: none;
+}
+
+.neon-button:hover::after {
+  opacity: 1;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow-text {
+  position: relative;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.glow-text:hover {
+  color: black !important;
+  text-shadow: 0 0 10px var(--clr-neon),
+              0 0 20px var(--clr-neon),
+              0 0 30px var(--clr-neon);
+}
+
+.neon-button:hover,
+.neon-button:focus {
+  color: var(--clr-bg);
+  text-shadow: none;
+  background-color: white;
+  box-shadow: 0 0 20px var(--clr-neon);
+  transform: translateY(-2px);
+}
+
+.neon-button:hover::before,
+.neon-button:focus::before {
+  opacity: 0.4;
+}
+
+.hover-description {
+  position: absolute;
+  width: 100%;
+  text-align: left;
+  color: #666;
+  bottom: -40px;
+  left: 0;
+  font-size: 0.9em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+  color: white;
+}
+
+.icon-wrapper {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+.neon-button:hover + .hover-description {
+  opacity: 1;
+}
+.neon-button:hover + p {
+  color: #444444;
+}
+
+.neon-button:hover::after,
+.neon-button:focus::after {
+  opacity: 0.7;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.icon-wrapper {
+  margin-bottom: 0.5rem;
+}
+
+.neon-button:hover {
+  background: var(--clr-neon);
+  color: var(--clr-bg);
+  text-shadow: 0 0 0.125em rgba(0, 0, 0, 0.3);
+}
+
+.neon-button:hover::before {
+  opacity: 0.8;
+}
+
+.neon-button:hover::after {
+  opacity: 0.8;
+}
+
+.neon-button p {
+  margin: 0;
+  padding-top: 1rem;
+  font-size: 0.9em;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.neon-button:hover p {
+  color: #333;
+}
+
+.neon-button:focus::after {
+  opacity: 0.7;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.icon-wrapper {
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

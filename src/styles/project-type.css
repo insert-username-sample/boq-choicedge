@@ -1,0 +1,13 @@
+.text-glow {
+    color: #4a5568;
+    text-shadow: 0 0 10px rgba(74, 85, 104, 0.3),
+                 0 0 20px rgba(74, 85, 104, 0.2),
+                 0 0 30px rgba(74, 85, 104, 0.1);
+    transition: text-shadow 0.3s ease;
+}
+
+.text-glow:hover {
+    text-shadow: 0 0 15px rgba(74, 85, 104, 0.4),
+                 0 0 25px rgba(74, 85, 104, 0.3),
+                 0 0 35px rgba(74, 85, 104, 0.2);
+}
