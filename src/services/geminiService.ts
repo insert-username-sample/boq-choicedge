@@ -212,14 +212,9 @@ export const parseGeminiResponse = (responseText: string): {
       projectDetails: parsedData.projectDetails,
       items: processedItems
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error parsing Gemini response:', error);
-    // Check if error is an instance of Error to safely access message
-    if (error instanceof Error) {
-      throw new Error(`Failed to parse Gemini response: ${error.message}`);
-    } else {
-      // Handle cases where error is not an Error object
-      throw new Error(`Failed to parse Gemini response: ${String(error)}`);
-    }
+    // Throw the error to be handled by the calling function
+    throw new Error(`Failed to parse Gemini response: ${error.message}`);
   }
 };
